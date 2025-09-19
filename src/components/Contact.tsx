@@ -1,10 +1,53 @@
+import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
 
 const Contact = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    nom: '',
+    email: '',
+    telephone: '',
+    message: ''
+  });
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!formData.nom || !formData.email || !formData.message) {
+      toast.error('Veuillez remplir tous les champs obligatoires');
+      return;
+    }
+
+    setIsLoading(true);
+    
+    try {
+      const { data, error } = await supabase.functions.invoke('contact-form', {
+        body: formData
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      toast.success(data.message || 'Votre message a été envoyé avec succès !');
+      setFormData({ nom: '', email: '', telephone: '', message: '' });
+    } catch (error: any) {
+      console.error('Contact form error:', error);
+      toast.error(error.message || 'Une erreur est survenue lors de l\'envoi du message');
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <section id="contact" className="py-20 bg-muted/50">
       <div className="container mx-auto px-4">
@@ -68,34 +111,37 @@ const Contact = () => {
           </div>
 
           <Card className="p-8 shadow-medium">
-            <h3 className="text-2xl font-bold text-primary mb-6">
-              Envoyez-nous un message
-            </h3>
-            <form className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm font-medium text-primary mb-2 block">Nom</label>
-                  <Input placeholder="Votre nom" className="w-full" />
-                </div>
-                <div>
-                  <label className="text-sm font-medium text-primary mb-2 block">Email</label>
-                  <Input type="email" placeholder="votre@email.com" className="w-full" />
-                </div>
-              </div>
-              <div>
-                <label className="text-sm font-medium text-primary mb-2 block">Sujet</label>
-                <Input placeholder="Objet de votre message" className="w-full" />
-              </div>
-              <div>
-                <label className="text-sm font-medium text-primary mb-2 block">Message</label>
-                <Textarea 
-                  placeholder="Votre message..." 
-                  className="w-full min-h-[120px] resize-none"
-                />
-              </div>
-              <Button className="w-full bg-gradient-primary hover:opacity-90 shadow-medium">
-                <Send className="w-5 h-5 mr-2" />
-                Envoyer le message
+            <h3 className="text-xl font-semibold mb-4">Envoyez-nous un message</h3>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <Input 
+                placeholder="Nom complet *" 
+                value={formData.nom}
+                onChange={(e) => handleInputChange('nom', e.target.value)}
+                required
+              />
+              <Input 
+                placeholder="Email *" 
+                type="email" 
+                value={formData.email}
+                onChange={(e) => handleInputChange('email', e.target.value)}
+                required
+              />
+              <Input 
+                placeholder="Téléphone" 
+                type="tel"
+                value={formData.telephone}
+                onChange={(e) => handleInputChange('telephone', e.target.value)}
+              />
+              <Textarea 
+                placeholder="Votre message... *" 
+                className="min-h-[120px]"
+                value={formData.message}
+                onChange={(e) => handleInputChange('message', e.target.value)}
+                required
+              />
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                <Send className="mr-2 h-4 w-4" />
+                {isLoading ? 'Envoi...' : 'Envoyer le message'}
               </Button>
             </form>
           </Card>
