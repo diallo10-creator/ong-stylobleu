@@ -1,5 +1,6 @@
 import { Phone, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import DonationModal from "./DonationModal";
 
 const Header = () => {
   return (
@@ -35,9 +36,11 @@ const Header = () => {
                 <span>Ongstylobleu@gmail.com</span>
               </div>
             </div>
-            <Button variant="default" size="sm" className="bg-gradient-primary hover:opacity-90">
-              Faire un don
-            </Button>
+            <DonationModal>
+              <Button variant="default" size="sm" className="bg-gradient-primary hover:opacity-90">
+                Faire un don
+              </Button>
+            </DonationModal>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { GraduationCap, Heart, Users } from "lucide-react";
 import heroImage from "@/assets/hero-education.jpg";
+import DonationModal from "./DonationModal";
 
 const Hero = () => {
   return (
@@ -30,10 +31,12 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-12">
-            <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow-medium">
-              <Heart className="w-5 h-5 mr-2" />
-              Soutenir notre cause
-            </Button>
+            <DonationModal>
+              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow-medium">
+                <Heart className="w-5 h-5 mr-2" />
+                Soutenir notre cause
+              </Button>
+            </DonationModal>
             <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
               <Users className="w-5 h-5 mr-2" />
               Découvrir nos actions
