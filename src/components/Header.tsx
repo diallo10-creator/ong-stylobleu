@@ -1,6 +1,8 @@
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import DonationModal from "./DonationModal";
+import logoOng from "@/assets/logo-ong.jpg";
 
 const Header = () => {
   return (
@@ -8,12 +10,14 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-lg">S</span>
-            </div>
+            <img 
+              src={logoOng} 
+              alt="Logo ONG Stylo Bleu - Éducation des enfants"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover"
+            />
             <div>
-              <h1 className="text-xl font-bold text-primary">ONG Stylo Bleu</h1>
-              <p className="text-xs text-muted-foreground">Éducation • Espoir • Progrès</p>
+              <h1 className="text-lg sm:text-xl font-bold text-primary">ONG Stylo Bleu</h1>
+              <p className="text-xs text-muted-foreground hidden sm:block">Éducation • Espoir • Progrès</p>
             </div>
           </div>
 
@@ -25,8 +29,8 @@ const Header = () => {
             <a href="#contact" className="text-foreground hover:text-primary transition-smooth">Contact</a>
           </nav>
 
-          <div className="flex items-center space-x-4">
-            <div className="hidden lg:flex items-center space-x-4 text-sm text-muted-foreground">
+          <div className="flex items-center space-x-2 sm:space-x-4">
+            <div className="hidden xl:flex items-center space-x-4 text-sm text-muted-foreground">
               <div className="flex items-center space-x-1">
                 <Phone className="w-4 h-4" />
                 <span>0586581601</span>
@@ -38,9 +42,40 @@ const Header = () => {
             </div>
             <DonationModal>
               <Button variant="default" size="sm" className="bg-gradient-primary hover:opacity-90">
-                Faire un don
+                <span className="hidden sm:inline">Faire un don</span>
+                <span className="sm:hidden">Don</span>
               </Button>
             </DonationModal>
+            
+            {/* Mobile menu */}
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="sm" className="md:hidden">
+                  <Menu className="h-5 w-5" />
+                  <span className="sr-only">Menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[280px] sm:w-[350px]">
+                <nav className="flex flex-col space-y-4 mt-6">
+                  <a href="#accueil" className="text-foreground hover:text-primary transition-smooth text-lg">Accueil</a>
+                  <a href="#apropos" className="text-foreground hover:text-primary transition-smooth text-lg">À propos</a>
+                  <a href="#mission" className="text-foreground hover:text-primary transition-smooth text-lg">Notre mission</a>
+                  <a href="#actions" className="text-foreground hover:text-primary transition-smooth text-lg">Nos actions</a>
+                  <a href="#contact" className="text-foreground hover:text-primary transition-smooth text-lg">Contact</a>
+                  
+                  <div className="pt-4 border-t border-border space-y-3">
+                    <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                      <Phone className="w-4 h-4" />
+                      <span>0586581601</span>
+                    </div>
+                    <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                      <Mail className="w-4 h-4" />
+                      <span>Ongstylobleu@gmail.com</span>
+                    </div>
+                  </div>
+                </nav>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>
