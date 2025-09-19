@@ -130,7 +130,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      check_registration_rate_limit: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
+      prevent_duplicate_registration: {
+        Args: { p_email: string; p_nom: string }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never
