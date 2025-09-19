@@ -1,4 +1,5 @@
 import { Heart, Phone, Mail, MapPin } from "lucide-react";
+import logoOng from "@/assets/logo-ong.jpg";
 
 const Footer = () => {
   return (
@@ -7,9 +8,11 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
-                <span className="text-primary font-bold">S</span>
-              </div>
+              <img 
+                src={logoOng} 
+                alt="Logo ONG Stylo Bleu"
+                className="w-8 h-8 rounded-full object-cover"
+              />
               <span className="text-xl font-bold">ONG Stylo Bleu</span>
             </div>
             <p className="text-white/80 leading-relaxed mb-4">
