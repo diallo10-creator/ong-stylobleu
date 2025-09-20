@@ -1,4 +1,5 @@
 import { Heart, Phone, Mail, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 import logoOng from "@/assets/logo-ong.jpg";
 
 const Footer = () => {
@@ -58,9 +59,17 @@ const Footer = () => {
 
         <div className="border-t border-white/20 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-white/60 text-sm">
-              © 2024 ONG Stylo Bleu. Tous droits réservés.
-            </p>
+            <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
+              <p className="text-white/60 text-sm">
+                © 2024 ONG Stylo Bleu. Tous droits réservés.
+              </p>
+              <Link 
+                to="/mentions-legales" 
+                className="text-white/60 hover:text-white/80 text-sm transition-colors"
+              >
+                Mentions légales
+              </Link>
+            </div>
             <p className="text-white/60 text-sm mt-2 md:mt-0">
               Organisation non gouvernementale • Éducation • Côte d'Ivoire
             </p>

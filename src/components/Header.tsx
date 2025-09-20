@@ -30,7 +30,7 @@ const Header = () => {
             <a href="#accueil" className="text-foreground hover:text-primary transition-smooth">Accueil</a>
             <a href="#apropos" className="text-foreground hover:text-primary transition-smooth">À propos</a>
             <a href="#mission" className="text-foreground hover:text-primary transition-smooth">Notre mission</a>
-            <a href="#actions" className="text-foreground hover:text-primary transition-smooth">Nos actions</a>
+            <a href="#faq" className="text-foreground hover:text-primary transition-smooth">FAQ</a>
             <a href="#contact" className="text-foreground hover:text-primary transition-smooth">Contact</a>
           </nav>
 
@@ -93,7 +93,7 @@ const Header = () => {
                   <a href="#accueil" className="text-foreground hover:text-primary transition-smooth text-lg">Accueil</a>
                   <a href="#apropos" className="text-foreground hover:text-primary transition-smooth text-lg">À propos</a>
                   <a href="#mission" className="text-foreground hover:text-primary transition-smooth text-lg">Notre mission</a>
-                  <a href="#actions" className="text-foreground hover:text-primary transition-smooth text-lg">Nos actions</a>
+                  <a href="#faq" className="text-foreground hover:text-primary transition-smooth text-lg">FAQ</a>
                   <a href="#contact" className="text-foreground hover:text-primary transition-smooth text-lg">Contact</a>
                   
                   <div className="pt-4 border-t border-border space-y-3">

@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import DonationSuccess from "./pages/DonationSuccess";
 import Auth from "./pages/Auth";
 import AdminDashboard from "./pages/AdminDashboard";
+import LegalNotice from "./pages/LegalNotice";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/donation-success" element={<DonationSuccess />} />
+            <Route path="/mentions-legales" element={<LegalNotice />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
