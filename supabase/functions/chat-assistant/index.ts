@@ -9,12 +9,23 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
+  console.log('Chat assistant function called');
+  
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
+    // Vérifier que la clé API existe
+    if (!openAIApiKey) {
+      console.error('OpenAI API key not found');
+      throw new Error('Clé API OpenAI manquante');
+    }
+
+    console.log('OpenAI API key found, processing request');
+    
     const { message } = await req.json();
+    console.log('Received message:', message);
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -62,6 +73,8 @@ Réponds toujours en français, de manière bienveillante, professionnelle et av
       }),
     });
 
+    console.log('OpenAI API response status:', response.status);
+    
     const data = await response.json();
     
     if (!response.ok) {
@@ -70,6 +83,7 @@ Réponds toujours en français, de manière bienveillante, professionnelle et av
     }
 
     const reply = data.choices[0].message.content;
+    console.log('Generated reply successfully');
 
     return new Response(JSON.stringify({ reply }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
